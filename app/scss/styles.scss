@@ -1,0 +1,20 @@
+body {
+    font-family: Roboto, Arial, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.title {
+    height: 400px;
+    background-color: #ccc;
+    width: percentage(5/7);
+    border-bottom: 3px solid #000;
+    border-radius: 3px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 35px;
+    padding-top: 30px;
+}
+
+.version {
+    font-style: italic;
+    font-size: 12px;
+    color: #ccc;
+}
