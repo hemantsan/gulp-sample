@@ -5,6 +5,7 @@ var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var cssnano = require('gulp-cssnano');
+var imagemin = require('gulp-imagemin');
 
 gulp.task('sass', () => {
     return gulp
@@ -32,7 +33,7 @@ gulp.task('browserSync', () => {
     });
 });
 
-gulp.task('minifyjs', () =>
+gulp.task('minify_js', () =>
     gulp
         .src('app/js/app.js')
         .pipe(
@@ -44,13 +45,24 @@ gulp.task('minifyjs', () =>
         .pipe(gulp.dest('dist/js'))
 );
 
-gulp.task('minifycss', function() {
+gulp.task('minify_css', function() {
     return gulp
         .src('app/css/styles.css')
         .pipe(cssnano())
         .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('build', ['minifycss', 'minifyjs'], function() {
+gulp.task('optimize_images', function() {
+    return gulp
+        .src('app/images/**/*.+(png|jpg|gif|svg)')
+        .pipe(
+            imagemin({
+                interlaced: true
+            })
+        )
+        .pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('build', ['minify_css', 'minify_js', 'optimize_images'], function() {
     return gulp.src('app/*.html').pipe(gulp.dest('dist'));
 });
